@@ -1,8 +1,6 @@
 #!/usr/bin/python3 -u
 
 import sys,exrex
-from signal import signal, SIGPIPE, SIG_DFL
-signal(SIGPIPE, SIG_DFL) 
 
 lines = set(exrex.generate(sys.argv[1]))
 
