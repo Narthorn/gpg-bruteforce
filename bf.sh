@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 GPG_KEY=${1+"--default-key $1"}
 
@@ -7,7 +7,7 @@ gpg $GPG_KEY -n --passphrase NobodyCouldPossiblyHaveThisAsAPassphrase --pinentry
 
 while read pass; do
 	if [[ $pass ]]; then
-		gpg_test=$(gpg $GPG_KEY -n --passphrase $pass --pinentry-mode loopback --clearsign /dev/null 2>&1)
+		gpg_test=$(gpg $GPG_KEY -n --passphrase "$pass" --pinentry-mode loopback --clearsign /dev/null 2>&1)
 		ret=$?
 		[[ $ret == 0 ]] && echo "Found ! Passphrase: $pass" && break
 		[[ ! $gpg_test =~ "Bad passphrase" ]] && echo "$gpg_test" && exit $ret
